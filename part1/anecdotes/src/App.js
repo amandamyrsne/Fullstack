@@ -1,6 +1,6 @@
 import { useState } from 'react'
-const Button = (props) => (
-  <button onClick={props.handleClick}>{props.text}</button>
+const Button = ({handleClick,text}) => (
+  <button onClick={handleClick}>{text}</button>
 )
 const App = () => {
   const anecdotes = [

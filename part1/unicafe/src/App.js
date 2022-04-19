@@ -1,76 +1,50 @@
 import { useState } from 'react'
 
-const Header = ({header}) =>{
-  return(
-  <h1>{header}</h1>
-  )
-}
-const Header2 = ({header2}) =>{
-  return(
-  <h1>{header2}</h1>
-  )
-}
-const Statistics = ({good, neutral, bad, all}) => {
-  if (all === 0){
-    return (
-      <div>
-      No feedback given
-      </div>
-    )
-  }
+const Statistics = ({text,value}) => {
     return(
-      <div>
-        <table>
-          <tbody>
-            <tr>
-              <td> good</td>
-              <td> {good}</td>
-            </tr>
-            <tr> 
-              <td>neutral</td>
-              <td>{neutral}</td>
-            </tr>
-            <tr> 
-              <td>bad </td>
-              <td>{bad}</td>
-            </tr>
-            <tr> 
-              <td>all</td>
-              <td>{all}</td>
-            </tr>
-            <tr> 
-              <td>average</td>
-              <td>{good*1 + neutral*0 + bad*-1}</td>
-            </tr>
-            <tr> 
-              <td>positiv</td>
-              <td>{good/all*100}</td>
-              <td>%</td>
-            </tr>
-          </tbody>
-      </table>
-    </div>
+    <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+    </tr>
   )
 }
-const Button = (props) => (
-  <button onClick={props.handleClick}>{props.text}</button>
+const Button = ({handleClick,text}) => (
+  <button onClick={handleClick}>{text}</button>
 )
 const App = () => {
-  // save clicks of each button to its own state
-  const header = 'give feedback'
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState( 0)
   const [bad, setBad] = useState(0)
-  const header2 = 'statistics'
+  const [all,setAll] = useState(0)
+
+  if (all === 0)
+  return (
+    <div>
+    <h1>give feedback</h1>
+    <Button handleClick={() => setGood(good +1) + setAll(all+1)}  text="good" />
+    <Button handleClick={() => setNeutral(neutral+1) + setAll(all+1)} text="neutral" />
+    <Button handleClick={() => setBad(bad + 1)+ setAll(all+1)} text="bad" />
+    <h1>statistics</h1>
+    <p>No feedback given</p>
+    </div>)
 
   return (
     <div>
-        <Header header={header} />
-        <Button handleClick={() => setGood(good +1)} text="good" />
-        <Button handleClick={() => setNeutral(neutral+1)} text="neutral" />
-        <Button handleClick={() => setBad(bad + 1)} text="bad" />
-        <Header2 header2 = {header2}/>
-        <Statistics good = {good} bad = {bad} neutral = {neutral} all = {good+neutral+bad}/>  
+        <h1>give feedback</h1>
+        <Button handleClick={() => setGood(good +1) + setAll(all+1)}  text="good" />
+        <Button handleClick={() => setNeutral(neutral+1) + setAll(all+1)} text="neutral" />
+        <Button handleClick={() => setBad(bad + 1)+ setAll(all+1)} text="bad" />
+        <h1>statistics</h1>
+        <table>
+          <tbody>
+            <Statistics text="good" value={good}/>
+            <Statistics text="neutral" value={neutral} />
+            <Statistics text="bad" value={bad} />
+            <Statistics text="all" value={all} />
+            <Statistics text="average" value={(good-bad)/all + "%" }/>
+            <Statistics text="positive" value={(good/all)*100} />
+          </tbody>
+        </table>
     </div>
   )
 }
