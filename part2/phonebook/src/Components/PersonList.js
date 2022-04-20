@@ -1,9 +1,10 @@
-const PersonList =({foundUsers}) => {
+const PersonList =({persons, deleteAccount}) => {
+   
     return (
         <ul style={{ listStyle: 'none'}}>
         <div>
-            {foundUsers.map(person =>  
-              <li key={person.name}>{person.name} {person.number}</li>
+            {persons.map(person =>  
+              <div key={person.name}>{person.name} {person.number} <button onClick={() =>deleteAccount(person.id)}>Delete</button></div>
             )}
         </div>
         </ul>
