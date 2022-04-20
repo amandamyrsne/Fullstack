@@ -1,3 +1,5 @@
+import Weather from './Weather'
+
 const CountriesToShow = ({input, search, handleClick}) =>{
     if(input.length === 0 || search === '')
     {
@@ -31,7 +33,7 @@ const CountriesToShow = ({input, search, handleClick}) =>{
             ))}
             </ul>
             <img src = {input[0].flags.png} alt={`${input[0].name} flag`}/>
-            <h2> Weather in {input[0].capital}</h2>
+            <Weather city = {input[0].capital}/>
 
         </div>  )
     }
