@@ -11,7 +11,6 @@ const App = () => {
     axios
     .get('https://restcountries.com//v3.1/all')
     .then(response => {
-      console.log('promise fulfilled')
       setCountries(response.data)
     })
   }, [])

@@ -11,9 +11,7 @@ const CountriesToShow = ({input, search, handleClick}) =>{
     { return (<div> Too many matches, specify another filter</div>)}
   
     else if (input.length >1)
-    { 
-        console.log(input);
-        return(
+    {   return(
         <div>{input.map((countries) => ( 
         <div key={countries.name.common}> {countries.name.common} 
         <button onClick={handleClick} value={countries.name.common}>  Show </button>  </div>
