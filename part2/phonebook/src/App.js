@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './Components/Filter'
 import PersonForm from './Components/PersonForm'
 import PersonList from './Components/PersonList'
@@ -15,10 +14,10 @@ const App = () => {
   const [confirmMessage,setConfirmMessage] = useState(null)
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+    personsService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }, [])
 
@@ -123,3 +122,4 @@ const App = () => {
 }
 
 export default App
+
