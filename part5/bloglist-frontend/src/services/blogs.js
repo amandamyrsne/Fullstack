@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3003/api/blogs'
+const baseUrl = '/api/blogs'
 
 let token = null
 
@@ -24,10 +24,20 @@ const update = (id, newObject) => {
   const request = axios.put(`${ baseUrl }/${id}`, newObject)
   return request.then(response => response.data)
 }
+
+const deleteBlog = async (blog) => {
+  const config = { headers: { Authorization: token } }
+  const response = await axios.delete(`${baseUrl}/${blog}`, config)
+
+  return response.data
+}
+
+
 const send = {
   getAll,
   create,
   update,
-  setToken
+  setToken,
+  deleteBlog
 }
 export default  send
